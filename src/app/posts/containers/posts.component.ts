@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { getPost } from 'src/app/core/store/post.selectors';
+import { Store } from '@ngrx/store';
 import { Post } from '../model/post';
 import { AppState } from 'src/app/core';
-import { loadPosts } from 'src/app/core/store/post.actions';
+import { loadPosts } from 'src/app/core/store/posts/post.actions';
+import { getPost } from 'src/app/core/store/posts/post.selectors';
 
 @Component({
   selector: 'app-posts',

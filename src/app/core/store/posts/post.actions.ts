@@ -1,5 +1,5 @@
-import { Post } from './../../posts/model/post';
 import { createAction, props } from '@ngrx/store';
+import { Post } from 'src/app/posts/model/post';
 
 export enum PostActionType {
   loadPostdetails = '[Post] Load Posts',

@@ -1,6 +1,4 @@
-import { PostEffects } from './store/post.effects';
 import { PostsService } from '../posts/services/posts.service';
-import { postReducer } from './store/post.reducer';
 import {
   ActionReducer,
   ActionReducerMap,
@@ -9,7 +7,8 @@ import {
   MetaReducer
 } from '@ngrx/store';
 import { environment } from 'src/environments/environment';
-import { PostState } from './store/post.reducer';
+import { PostEffects } from './store/posts/post.effects';
+import { PostState, postReducer } from './store/posts/post.reducer';
 
 
 // tslint:disable-next-line: no-empty-interface

@@ -1,8 +1,8 @@
 import { loadPosts, loadPostsFailure, loadPostsSuccess } from './post.actions';
-import { Post } from './../../posts/model/post';
 import { Action, createReducer, on, createFeatureSelector } from '@ngrx/store';
 import { state } from '@angular/animations';
-import { AppState } from '..';
+import { Post } from 'src/app/posts/model/post';
+import { AppState } from '../..';
 
 
 export const postFeatureKey = 'post';
@@ -28,11 +28,11 @@ export const postReducer = createReducer(
 
   // tslint:disable-next-line: no-shadowed-variable
   on(loadPostsSuccess, (state, { post }) => {
-    return ({ ...state, post, loaded: false, loading: false });
+    return ({ ...state, post, loaded: true, loading: false });
   }),
 
   // tslint:disable-next-line: no-shadowed-variable
-  on(loadPostsFailure, (state) => ({ ...state, loaded: false, loading: false }))
+  on(loadPostsFailure, (state) => ({ ...state, loaded: false, loading: true }))
 
 
 );
