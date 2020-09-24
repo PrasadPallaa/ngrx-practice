@@ -1,21 +1,34 @@
+import { PostsService } from './../posts/services/posts.service';
 import { environment } from './../../environments/environment';
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Store, StoreModule } from '@ngrx/store';
+import { ROOT_REDUCERS, metaReducers, ROOT_EFFECTS } from '.';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { PostEffects } from './post.effects';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(ROOT_REDUCERS, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forFeature([PostEffects]),
-  ]
+    EffectsModule.forRoot(ROOT_EFFECTS),
+  ],
+  providers: [PostsService]
 })
-export class CoreModule { }
+export class CoreModule {
+  constructor(
+    @Optional()
+    @SkipSelf()
+    parentModule: CoreModule
+  ) {
+
+    if (parentModule) {
+      throw new Error('Core module is already loaded. Import it in the App module only');
+    }
+
+  }
+}
